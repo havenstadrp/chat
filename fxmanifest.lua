@@ -4,18 +4,15 @@ game 'gta5'
 ui_page "html/index.html"
 
 
-shared_scripts {
-	'config.lua'
-}
-
 client_scripts {
- 'client.lua'
+    'config.lua',
+ 'client.lua',
 }
 
 server_scripts {
- 'server.lua'
+    'config.lua',
+ 'server.lua',
 }
-
 
 files {
  'html/*',

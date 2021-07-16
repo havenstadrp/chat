@@ -1,26 +1,25 @@
-RegisterNetEvent("3dme:me")
-AddEventHandler("3dme:me", function(text, source, icon)
-    local playerId = GetPlayerFromServerId(source)
-    local isDisplaying = true
-    if icon == nil then icon = 'icons' end
+RegisterNetEvent("me:image")
+AddEventHandler("me:image", function(Text, Source)
+    local PlayerId = GetPlayerFromServerId(Source)
+    local IsDisplaying = true
     Citizen.CreateThread(function()
-        while isDisplaying do
+        while IsDisplaying do
             Citizen.Wait(0)
             local htmlString = ""
-            local sourceCoords = GetEntityCoords(GetPlayerPed(playerId))
-            local nearCoords = GetEntityCoords(PlayerPedId())
-            local distance = Vdist2(sourceCoords, nearCoords)
-            if distance < 25.0 then
+            local SourceCoords = GetEntityCoords(GetPlayerPed(PlayerId))
+            local NearCoords = GetEntityCoords(PlayerPedId())
+            local Distance = Vdist2(SourceCoords, NearCoords)
+            if Distance < 25.0 then
                 local onScreen, xxx, yyy =
                     GetHudScreenPositionFromWorldPosition(
-                        sourceCoords.x + Config.CoordsX,
-                        sourceCoords.y + Config.CoordsY,
-                        sourceCoords.z + Config.CoordsZ)
+                        SourceCoords.x + Config.CoordsX,
+                        SourceCoords.y + Config.CoordsY,
+                        SourceCoords.z + Config.CoordsZ)
                 htmlString =
                     htmlString ..
                     '<span style="position: absolute; left: ' ..
                     xxx * 100 ..
-                    "%;top: " .. yyy * 100 .. '%;"><div class="me-container"><div class="icon-container"><i class="fa-solid fa-'..icon..' fa-3x"></i></div><div class="text-container">' .. text .. "</div></div></span>"
+                    "%;top: " .. yyy * 100 .. '%;"><p class="box sb3">*' .. Text .. "</p></span>"
             end
             if lasthtmlString ~= htmlString then
                 SendNUIMessage({
@@ -30,13 +29,13 @@ AddEventHandler("3dme:me", function(text, source, icon)
                 lasthtmlString = htmlString
             end
         end
-        if isDisplaying == false then
+        if IsDisplaying == false then
             SendNUIMessage({toggle = false})
         end
     end)
     Citizen.CreateThread(function()
         Citizen.Wait(Config.Duration)
-        isDisplaying = false
+        IsDisplaying = false
         SendNUIMessage({toggle = false})
     end)
 end)
