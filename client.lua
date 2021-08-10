@@ -19,7 +19,7 @@ AddEventHandler("me:image", function(Text, Source)
                     htmlString ..
                     '<span style="position: absolute; left: ' ..
                     xxx * 100 ..
-                    "%;top: " .. yyy * 100 .. '%;"><p class="box sb3">*' .. Text .. "</p></span>"
+                    "%;top: " .. yyy * 100 .. '%;"><p class="box sb3">' .. Text .. "</p></span>"
             end
             if lasthtmlString ~= htmlString then
                 SendNUIMessage({
