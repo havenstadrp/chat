@@ -17,17 +17,17 @@ RegisterNetEvent('__cfx_internal:serverPrint')
 RegisterNetEvent('_chat:messageEntered')
 
 --deprecated, use chat:addMessage
-AddEventHandler('chatMessage', function(author, ctype, text)
+AddEventHandler('chatMessage', function(author, color, text)
   local args = { text }
   if author ~= "" then
     table.insert(args, 1, author)
   end
-  local ctype = ctype ~= false and ctype or "normal"
   SendNUIMessage({
     type = 'ON_MESSAGE',
     message = {
-      template = '<div class="chat-message '..ctype..'"><div class="chat-message-body"><strong>{0}:</strong> {1}</div></div>',
-      args = {author, text}
+      color = color,
+      multiline = true,
+      args = args
     }
   })
 end)
