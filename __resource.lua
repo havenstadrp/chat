@@ -1,3 +1,6 @@
+fx_version 'adamant'
+game 'gta5'
+
 description 'chat management stuff'
 
 ui_page 'html/index.html'
